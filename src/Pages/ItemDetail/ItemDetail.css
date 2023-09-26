@@ -1,0 +1,22 @@
+.ItemDetailTitle, .ItemDetailPrecio {
+    margin: 10px;
+    color: crimson;
+    font-size: 30px;
+}
+
+img {
+    width: 500px;
+    height: 500px;
+}
+
+.DetailItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.ItemDesc {
+    display: flex;
+    margin: 10px;
+    font-size: large;
+}

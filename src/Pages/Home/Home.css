@@ -1,0 +1,14 @@
+.FilterItemList {
+    text-decoration: none;
+    display: flex;
+    background-color: palevioletred;
+    color: black;
+    border: 1px solid black;
+    justify-content: center;
+    margin: 3px;
+    padding: 3px;
+    align-items: end;
+}
+#dropdown-basic {
+    display: flex;
+}

@@ -1,0 +1,15 @@
+h1 {
+    color: brown;
+    margin: 10px;
+}
+
+p {
+    padding: 10px;
+    font-size: 20px;
+}
+
+.HomeLink {
+    font-size: large;
+    font-weight: 800;
+    margin: 10px;
+}
