@@ -1,13 +1,19 @@
+import { createContext } from "react";
 import "./App.css";
 import Navigation from './Routes/Navigation'
-import ItemCount from './Components/ItemCount/ItemCount'
+import CartContext from './Context/CartContext'
+
+
+
 
 function App() {
   return (
-    <div>
-      <Navigation />
-    </div>
+    <CartContext>
+            <Navigation />
+    </CartContext>
+
   );
 }
+export const ThemeContext = createContext()
 
 export default App

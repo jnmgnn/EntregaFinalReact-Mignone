@@ -1,75 +1,71 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
 import Layout from '../../Components/Layout'
 import Item from '../../Components/Item'
-import { productos } from '../../products'
 import ItemList from '../../Components/ItemList'
 import '../Home/Home.css'
 import { FaFilter } from 'react-icons/fa'
 import Dropdown from 'react-bootstrap/Dropdown';
-import DropdownButton from 'react-bootstrap/DropdownButton';
+import { CartCtx } from '../../Context/CartContext'
+import { tailspin } from 'ldrs'
+tailspin.register()
+import React from 'react'
+import { getProductList } from "../../DB/Db"
+
 
 const Home = () => {
     const [isLoading, setIsLoading] = useState(true)
-    const [products, setProducts] = useState([])
+    const { listProducts, setListProducts } = useContext(CartCtx);
     const [filterByCategory, setFilterByCategory] = useState(null)
 
-    useEffect(()=> {
-        setTimeout(()=> {
-            setProducts(productos);
-            setIsLoading(false)
-        }, 1000)
-    }, [])
+    const getProducts = async () => {
+        setListProducts(await getProductList())
+        setIsLoading(false)
+    }
+    useEffect(() => {
+        getProducts();
+    }, []);
+
+    if (isLoading) {
+        return <div className='loader-container'>
+            <l-tailspin className='loader'
+                size="72"
+                speed="2.6"
+                color="crimson"
+                stroke="16"
+            ></l-tailspin>
+        </div>
+    }
+
     return (
         <Layout>
             <Dropdown>
-            <Dropdown.Toggle variant="success" id="dropdown-basic">
-                <FaFilter />
-            </Dropdown.Toggle>
-
-            <Dropdown.Menu>
-                <Dropdown.Item onClick={() => setFilterByCategory(null)} className='FilterItemList'>Todos</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Hello Kitty')} className='FilterItemList'>Hello Kitty</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Cinnamoroll')} className='FilterItemList'>Cinnamoroll</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Kuromi')} className='FilterItemList'>Kuromi</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('My Melody')} className='FilterItemList'>My Melody</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Pompompurin')} className='FilterItemList'>Pompompurin</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Pochacco')} className='FilterItemList'>Pochacco</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Badtz-maru')} className='FilterItemList'>Badtz-maru</Dropdown.Item>
-                <Dropdown.Item onClick={() => setFilterByCategory('Keroppi')} className='FilterItemList'>Keroppi</Dropdown.Item>
-            </Dropdown.Menu>
+                <Dropdown.Toggle variant="success" id="dropdown-basic">
+                    <FaFilter />
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                    <Dropdown.Item onClick={() => setFilterByCategory(null)} className='FilterItemList'>Todos</Dropdown.Item>
+                    {listProducts.map((prod) => (<Dropdown.Item onClick={() => setFilterByCategory(prod.nombre)} className='FilterItemList'>{prod.nombre}</Dropdown.Item>))}
+                </Dropdown.Menu>
             </Dropdown>
             <ItemList>
-                { isLoading ? (
-                <div>Cargando...</div> 
-                ) : products && !filterByCategory ? (
-                products.map((prod) => (
-                        <Item 
-                        key={prod.id}
-                        imgUrl={prod.img}
-                        id={prod.id}
-                        nombre={prod.nombre}
-                        descripcion={prod.descripcion}
-                        precio={prod.precio}
-                        ></Item>
-                    ))
-                ) : (
-                    products
-                    ?.filter((prod) => prod.categoria === filterByCategory)
-                    .map((prod) => (
-                        <Item 
-                        key={prod.id}
-                        imgUrl={prod.img}
-                        id={prod.id}
-                        nombre={prod.nombre}
-                        descripcion={prod.descripcion}
-                        precio={prod.precio}
-                        ></Item>
-                    ))
-                    )}
+                {listProducts.map((prod) => {
+                    if ((filterByCategory != null && filterByCategory == prod.nombre) || !filterByCategory)
+                        return (
+                            <Item
+                                key={prod.id}
+                                imgUrl={prod.img}
+                                id={prod.id}
+                                nombre={prod.nombre}
+                                descripcion={prod.descripcion}
+                                precio={prod.precio}
+                            ></Item>
+                        )
+                })
+                }
             </ItemList>
         </Layout>
     );
-    
+
 }
 
 export default Home

@@ -1,22 +1,57 @@
-.ItemDetailTitle, .ItemDetailPrecio {
-    margin: 10px;
-    color: crimson;
-    font-size: 30px;
-}
-
-img {
-    width: 500px;
-    height: 500px;
-}
-
 .DetailItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.ItemDesc {
-    display: flex;
+    padding: 20px;
     margin: 10px;
-    font-size: large;
-}
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .DetailItem img {
+    width: 400px;
+    height: 400px;
+  }
+  
+  .ItemDetailTitle {
+    font-size: 24px;
+    margin: 10px 0;
+  }
+  
+  .ItemDetailPrecio {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 10px;
+  }
+  
+  .DetailItem button {
+    background-color: crimson;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+  }
+  
+  .DetailItem button:hover {
+    background-color: #461f04;
+  }
+  
+  .ItemDesc {
+    margin-top: 20px;
+    background-color: lightcoral;
+    border-radius: 15px;
+    padding: 10px;
+  }
+  
+  .ItemDesc h2 {
+    font-size: 50px;
+    margin: 10px 0;
+    color: darkred;
+    
+  }
+  
+  .ItemDesc div {
+    font-size: 20px;
+    line-height: 1.5;
+  }
+  

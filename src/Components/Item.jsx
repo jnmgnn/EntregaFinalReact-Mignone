@@ -14,11 +14,10 @@ const Item = ({id, nombre, precio, descripcion, imgUrl}) => {
           <img src={imgUrl} alt={nombre} className="ItemImg"/>
         </picture>
         <section>
-          <p className="Precio">{precio}</p>
+          <p className="Precio">${precio}</p>
         </section>
         <footer className="ItemFooter">
           <Link to={`/product/${id}`} className="Info">Ver Detalle</Link>
-          <ItemCount initial={1} stock={10} onAdd={(quantity) => console.log('Cantidad Agregada ', quantity)} /> 
         </footer>
       </article>
     )

@@ -1,36 +1,28 @@
 import '../ItemCount/ItemCount.css'
-import { useState } from 'react'
+import { useState, useContext } from 'react'
+import { CartCtx } from '../../Context/CartContext'
 
 
-const ItemCount = ({stock, initial, onAdd}) => {
-    const [quantity, setQuantity] = useState(initial)
+const ItemCount = ({ id, stock, onChange }) => {
+    const { cart } = useContext(CartCtx);
+    const [quantity, setQuantity] = useState(cart[id] || 0);
+    const addRemoveItem = step => {
+        let newStock = quantity + step
 
-    const increment = () => {
-        if (quantity < stock) {
-            setQuantity(quantity+1)
-        }
-    }
-
-    const decrement = () => {
-        if(quantity > 1) {
-            setQuantity(quantity - 1)
+        if (!(newStock < 0 || newStock > stock)) {
+            setQuantity(newStock)
+            onChange(newStock)
         }
     }
 
     return (
-<div className='Counter'>
-    <div className='ButtonsTop'>
-        <button className='Button' onClick={decrement}>-</button>
-        <p className='Number'>{quantity}</p>  
-        <button className='Button' onClick={increment}>+</button>
-    </div>
-    <div className='ButtonBottom'>
-        <button className='Button' onClick={() => onAdd(quantity)} disabled={!stock}>
-            Agregar al carrito
-        </button>
-    </div>
-</div>
-
+        <div className='Counter'>
+            <div className='ButtonsTop'>
+                <button className='Button' onClick={() => addRemoveItem(-1)}>-</button>
+                <p className='Number'>{quantity}</p>
+                <button className='Button' onClick={() => addRemoveItem(1)}>+</button>
+            </div>
+        </div>
     )
 }
 

@@ -1,7 +1,7 @@
 .ItemHeader {
     display: flex;
     justify-content: center;
-    font-family: 'Quicksand', sans-serif;
+    font-family: 'Rubik', sans-serif;
 }
 
 
@@ -30,8 +30,22 @@ button {
     align-items: center;
     text-decoration: none;
     cursor: pointer;
-
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: crimson; /* Set the background color to your desired color */
+    color: #fff; /* Set the text color to your desired color */
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 16px; /* Set the font size to your desired size */
+    font-weight: bold; /* Set the font weight to your desired weight */
+    margin: 10px;
 }
+  .Info:hover {
+    background-color: darkred; /* Change the background color on hover */
+  }
 
 .ItemImg {
     width: 300px;

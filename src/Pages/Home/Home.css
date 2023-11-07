@@ -8,7 +8,15 @@
     margin: 3px;
     padding: 3px;
     align-items: end;
+    font-family: 'Rubik', sans-serif;
 }
 #dropdown-basic {
     display: flex;
 }
+
+.loader-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* You can adjust the height as needed */
+  }
